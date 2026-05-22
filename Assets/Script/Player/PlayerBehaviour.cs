@@ -12,7 +12,8 @@ public class PlayerBehaviour : MonoBehaviour
     public LayerMask GroundLayer;
     public GameObject Bullet;
     public float BulletSpeed = 100f;
-    
+    public GameBehaviour GameManager;
+
 
     private float _vInput;
     private float _hInput;
@@ -29,6 +30,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        GameManager = GameObject.Find("Game Manager").GetComponent<GameBehaviour>();
     }
 
     // Update is called once per frame
