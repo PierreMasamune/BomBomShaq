@@ -15,6 +15,7 @@ public class GameBehaviour : MonoBehaviour
     public TMP_Text HealthText;
     public TMP_Text ProgressText;
     public Button Winbutton;
+    public Button LossButton;
 
     void Start()
     {
@@ -24,6 +25,10 @@ public class GameBehaviour : MonoBehaviour
         if(Winbutton != null)
         {
             Winbutton.gameObject.SetActive(false);
+        }
+        if (LossButton != null) 
+        {
+            LossButton.gameObject.SetActive(false);
         }
 
     }
@@ -58,10 +63,30 @@ public class GameBehaviour : MonoBehaviour
         get { return _playerHP; }
         set
         {
+            if (_playerHP == 0)
+            {
+                UpdateScene("You want another life with that?");
+                if(LossButton != null)
+                {
+                    LossButton.gameObject.SetActive(true);
+                }
+                else
+                {
+                    ProgressText.text = "Ouchh!!! That's Hurt.";
+                }
+            }
+
             _playerHP = value;
             HealthText.text = "Health: " + _playerHP;
-            Debug.LogFormat("Lives: {0}", _playerHP);
+            Debug.LogFormat("Lives: {0}", _playerHP);   
         }
+    }
+
+    public void UpdateScene(string updatedText)
+    {
+        ProgressText.text = updatedText;
+        Time.timeScale = 0f;
+
     }
 
     public void RestartGame()
