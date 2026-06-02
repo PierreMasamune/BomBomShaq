@@ -63,7 +63,7 @@ public class GameBehaviour : MonoBehaviour
         get { return _playerHP; }
         set
         {
-            if (_playerHP == 0)
+            if (_playerHP <= 0)
             {
                 UpdateScene("You want another life with that?");
                 if(LossButton != null)
